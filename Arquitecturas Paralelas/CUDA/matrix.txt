@@ -1,0 +1,69 @@
+
+/* Matrix multiplication: P = M * N.
+ * Device code.
+ */
+
+#ifndef _MATRIXMUL_KERNEL_H_
+#define _MATRIXMUL_KERNEL_H_
+
+#include <stdio.h>
+#include "matrixmul.h"
+
+
+////////////////////////////////////////////////////////////////////////////////
+//! Matrix multiplication on the device: P = M * N
+//! Mw is M's width and Nw is N's width
+////////////////////////////////////////////////////////////////////////////////
+__global__ void matrixMul( float* P, float* M, float* N, int Mw, int Nw)
+{
+    int bx = blockIdx.x;     int by = blockIdx.y;
+    int tx = threadIdx.x;    int ty = threadIdx.y;
+    __shared__ float Ms[BLOCK_SIZE][BLOCK_SIZE];
+    __shared__ float Ns[BLOCK_SIZE][BLOCK_SIZE];
+
+    // ===================================================================
+    // Code segment 1
+    // Determine the update values for the tile indices in the loop
+    // ===================================================================
+
+        int blockRow = by * blockDim.y + ty;
+        int blockCol = bx * blockDim.x + tx;
+    /* COMPLETAR */
+    /* COMPLETAR */
+    /* COMPLETAR */
+    /* COMPLETAR */
+    /* COMPLETAR */
+
+    // ===================================================================
+    // Code segment 2
+    // Do matrix-matrix multiplication inside a tile
+    // ===================================================================
+
+    for ( /* COMPLETAR */  ) {
+
+        // Load a tile from M and N into the shared memory arrays
+        /* COMPLETAR */
+        /* COMPLETAR */
+
+        // Synchronize the threads
+        /* COMPLETAR */
+
+        // Multiply the two tiles together, each thread accumulating
+        // the partial sum of a single dot product.
+        for (int i = 0; i < BLOCK_SIZE; i++) {
+            /* COMPLETAR */
+        }
+
+        // Synchronize again.
+  /* COMPLETAR */
+}
+
+// ===================================================================
+// Code segment 3
+// Store the data back to global memory
+// ===================================================================
+
+/* COMPLETAR */
+}
+
+#endif // #ifndef _MATRIXMUL_KERNEL_H_
